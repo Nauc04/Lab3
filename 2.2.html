@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Аналізатор дати</title>
+  <style>
+    body {
+      font-family: sans-serif;
+    }
+    label, input, button {
+      font-size: 16px;
+      margin: 8px 0;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Введіть дату (дд.мм.рррр або дд/мм/рррр або дд-мм-рррр):</h2>
+
+<input type="text" id="userDate" placeholder="Наприклад: 05.06.2025">
+<button onclick="analyzeDate()">Перевірити</button>
+
+<p id="output"></p>
+
+<script>
+  function analyzeDate() {
+    const input = document.getElementById('userDate').value.trim();
+    const output = document.getElementById('output');
+
+    // Замінити всі роздільники на крапку
+    const normalized = input.replace(/[\/\-]/g, '.');
+    const [dd, mm, yyyy] = normalized.split('.').map(Number);
+
+    const inputDate = new Date(yyyy, mm - 1, dd);
+    if (isNaN(inputDate.getTime())) {
+      output.textContent = 'Невірний формат дати.';
+      return;
+    }
+
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const entered = new Date(inputDate.getFullYear(), inputDate.getMonth(), inputDate.getDate());
+
+    const diffMs = today - entered;
+    const diffDays = Math.round(diffMs / (1000 * 60 * 60 * 24));
+
+    let result = '';
+
+    if (diffDays === 0) {
+      result = 'Сьогодні';
+    } else if (diffDays === 1) {
+      result = 'Вчора';
+    } else if (diffDays >= 2 && diffDays <= 6) {
+      result = `${diffDays} ${getDayWord(diffDays)} тому`;
+    } else if (diffDays === 7) {
+      result = 'Тиждень тому';
+    } else if (diffDays >= 365 && diffDays < 730) {
+      result = 'Рік тому';
+    } else {
+      const formatted = `${inputDate.getFullYear()}.${(inputDate.getMonth() + 1).toString().padStart(2, '0')}.${inputDate.getDate().toString().padStart(2, '0')}`;
+      result = formatted;
+    }
+
+    output.textContent = result;
+  }
+
+  function getDayWord(n) {
+    if (n === 2 || n === 3 || n === 4) return 'дні';
+    return 'днів';
+  }
+</script>
+
+</body>
+</html>

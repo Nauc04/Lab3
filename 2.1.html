@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Завдання №1 - Поточна дата та час</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    td, th {
+      border: 1px solid #999;
+      padding: 10px;
+      vertical-align: top;
+    }
+    th {
+      background-color: #eee;
+    }
+    button {
+      padding: 5px 10px;
+    }
+  </style>
+</head>
+<body>
+<table>
+  <tr>
+    <th>Завдання</th>
+    <th></th>
+    <th>Результат</th>
+  </tr>
+  <tr>
+    <td><b>Завдання №1.</b> Виведення поточної дати та часу</td>
+    <td><button onclick="showDateTime()">Виконати</button></td>
+    <td id="result"></td>
+  </tr>
+</table>
+
+<script>
+  function showDateTime() {
+    const now = new Date();
+
+    const days = ['неділя', 'понеділок', 'вівторок', 'середа', 'четвер', 'п’ятниця', 'субота'];
+    const months = [
+      'січня', 'лютого', 'березня', 'квітня', 'травня', 'червня',
+      'липня', 'серпня', 'вересня', 'жовтня', 'листопада', 'грудня'
+    ];
+
+    const day = now.getDate();
+    const month = months[now.getMonth()];
+    const year = now.getFullYear();
+    const weekday = days[now.getDay()];
+
+    const hours = now.getHours().toString().padStart(2, '0');
+    const minutes = now.getMinutes().toString().padStart(2, '0');
+    const seconds = now.getSeconds().toString().padStart(2, '0');
+
+    const result = `
+        Дата: ${day} ${month} ${year} року<br>
+        День: ${weekday}<br>
+        Час: ${hours}:${minutes}:${seconds}
+      `;
+
+    document.getElementById('result').innerHTML = result;
+  }
+</script>
+</body>
+</html>
