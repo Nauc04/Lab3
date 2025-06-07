@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Таблиця з рядків</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    td {
+      border: 1px solid #333;
+      padding: 8px 12px;
+    }
+  </style>
+</head>
+<body>
+<h1>Перетворення тексту в HTML-таблицю</h1>
+
+<textarea id="inputLines" rows="8" cols="50" placeholder="Введіть кожен рядок на окремому рядку..."></textarea><br><br>
+<button onclick="generateTable()">Створити таблицю</button>
+
+<div id="output"></div>
+
+<script>
+  function generateTable() {
+    const lines = document.getElementById("inputLines").value.trim().split("\n");
+    let html = "<table>";
+
+    for (let line of lines) {
+      html += `<tr><td>${line.trim()}</td></tr>`;
+    }
+
+    html += "</table>";
+
+    document.getElementById("output").innerHTML = html;
+  }
+</script>
+</body>
+</html>

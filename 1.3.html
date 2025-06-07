@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Створити заголовки</title>
+</head>
+<body>
+<h1>Генератор заголовків &lt;h2&gt;</h1>
+
+<label>Скільки заголовків створити? <input type="number" id="headerCount" min="1" value="5"></label>
+<button onclick="generateHeaders()">Створити</button>
+
+<div id="headersContainer"></div>
+
+<script>
+  function createHeaders(N) {
+    const container = document.getElementById("headersContainer");
+    container.innerHTML = ""; // Очистити попередні заголовки
+
+    for (let i = 1; i <= N; i++) {
+      const h2 = document.createElement("h2");
+      h2.textContent = `Header${i}`;
+      container.appendChild(h2);
+    }
+  }
+
+  function generateHeaders() {
+    const count = parseInt(document.getElementById("headerCount").value);
+    if (isNaN(count) || count < 1) {
+      alert("Введіть число більше за 0");
+      return;
+    }
+    createHeaders(count);
+  }
+</script>
+</body>
+</html>
