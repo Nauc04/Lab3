@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Змінити розмір шрифту</title>
+</head>
+<body>
+<h1>Виведення тексту з вказаним розміром шрифту</h1>
+
+<label>Текст: <input type="text" id="inputText" placeholder="Введіть текст"></label><br><br>
+<label>Розмір шрифту (наприклад: 24px): <input type="text" id="inputSize" placeholder="24px або 2em"></label><br><br>
+
+<button onclick="showText()">Показати</button>
+
+<p id="result"></p>
+
+<script>
+    function showText() {
+        const text = document.getElementById("inputText").value;
+        const size = document.getElementById("inputSize").value;
+        const result = document.getElementById("result");
+
+        result.textContent = text;
+        result.style.fontSize = size;
+    }
+</script>
+</body>
+</html>
